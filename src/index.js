@@ -2,25 +2,43 @@
 import countryCardTpl from '../src/partials/country-card.hbs';
 import countryListTpl from '../src/partials/countries.hbs';
 
+// import API from './fetchCountries.js'
+
 const refs = {
   input: document.querySelector('.input'),
   countriesList: document.querySelector('.countries-list'),
   countryCard: document.querySelector('.country-card'),
 };
 
-fetchCountry()
-  .then(renderCountryCard)
-  .catch(error => {
-    console.log(error);
-  });
+const BASE_URL = 'https://restcountries.eu/rest/v2/name/';
 
-function fetchCountry() {
-  return fetch('https://restcountries.eu/rest/v2/name/ukraine').then(response => {
+refs.input.addEventListener('input', onInput);
+
+function onInput(e) {
+  e.preventDefault();
+
+  const inputValue = e.target.value;
+
+
+
+  fetchCountry(inputValue)
+    .then(renderCountryCard)
+    .catch(error => {
+      console.log(error);
+    });
+
+
+}
+
+function fetchCountry(inputValue) {
+  return fetch(`${BASE_URL}${inputValue}`).then(response => {
     return response.json();
   });
 }
 
 function renderCountryCard(country) {
   const card = countryCardTpl(country);
-  refs.countryCard.innerHTML = card;
+  const list = countryListTpl(country);
+  // refs.countryCard.innerHTML = card;
+  refs.countriesList.innerHTML = list;
 }
