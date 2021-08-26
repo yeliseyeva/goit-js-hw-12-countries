@@ -27,7 +27,11 @@ function onInput(e) {
       console.log(error);
     });
 
+    resetHTML()
+}
 
+function resetHTML(){
+  refs.countryCard.innerHTML = '';
 }
 
 function fetchCountry(inputValue) {
@@ -37,8 +41,14 @@ function fetchCountry(inputValue) {
 }
 
 function renderCountryCard(country) {
-  const card = countryCardTpl(country);
-  const list = countryListTpl(country);
-  // refs.countryCard.innerHTML = card;
-  refs.countriesList.innerHTML = list;
+  const length = country.length;
+  if(length === 1) {
+    refs.countryCard.innerHTML = countryCardTpl(country);
+  } else if (length > 10) {
+    console.log('ERROR')
+  } else {
+    refs.countryCard.innerHTML = countryListTpl(country);
+  }
+  // refs.countryCard.innerHTML = countryCardTpl(country);
+  // refs.countryCard.innerHTML = countryListTpl(country);
 }
