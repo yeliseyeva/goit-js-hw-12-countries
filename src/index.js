@@ -1,27 +1,32 @@
 // import './sass/main.scss';
+// import '@pnotify/core/dist/PNotify.css';
+// import '@pnotify/desktop/dist/PNotifyDesktop';
+// import '@pnotify/core/dist/BrightTheme.css';
+// import '@pnotify/desktop/dist/PNotifyDesktop';
+import { error, info } from '@pnotify/core';
+import '@pnotify/core/dist/PNotify.css';
+import '@pnotify/core/dist/BrightTheme.css';
+
 import countryCardTpl from '../src/partials/country-card.hbs';
 import countryListTpl from '../src/partials/countries.hbs';
 
-// import API from './fetchCountries.js'
+import debounce from 'lodash.debounce';
+
+import API from './fetchCountries'
 
 const refs = {
   input: document.querySelector('.input'),
-  countriesList: document.querySelector('.countries-list'),
   countryCard: document.querySelector('.country-card'),
 };
 
-const BASE_URL = 'https://restcountries.eu/rest/v2/name/';
-
-refs.input.addEventListener('input', onInput);
+refs.input.addEventListener('input', debounce(onInput, 500));
 
 function onInput(e) {
   e.preventDefault();
 
   const inputValue = e.target.value;
 
-
-
-  fetchCountry(inputValue)
+  API.fetchCountry(inputValue)
     .then(renderCountryCard)
     .catch(error => {
       console.log(error);
@@ -34,21 +39,15 @@ function resetHTML(){
   refs.countryCard.innerHTML = '';
 }
 
-function fetchCountry(inputValue) {
-  return fetch(`${BASE_URL}${inputValue}`).then(response => {
-    return response.json();
-  });
-}
-
 function renderCountryCard(country) {
   const length = country.length;
   if(length === 1) {
     refs.countryCard.innerHTML = countryCardTpl(country);
   } else if (length > 10) {
-    console.log('ERROR')
+    error({
+      text: 'Too many countries found. Please enter a more specific query',
+    });
   } else {
     refs.countryCard.innerHTML = countryListTpl(country);
   }
-  // refs.countryCard.innerHTML = countryCardTpl(country);
-  // refs.countryCard.innerHTML = countryListTpl(country);
 }
