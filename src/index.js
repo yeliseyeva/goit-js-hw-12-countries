@@ -1,4 +1,4 @@
-import './sass/main.scss';
+// import './sass/main.scss';
 import countryCardTpl from '../src/partials/country-card.hbs';
 import countryListTpl from '../src/partials/countries.hbs';
 
@@ -9,18 +9,18 @@ const refs = {
 };
 
 fetchCountry()
-  .then(renderCountyCard)
+  .then(renderCountryCard)
   .catch(error => {
     console.log(error);
   });
 
 function fetchCountry() {
-  return fetch('https://restcountries.eu/rest/v2/name/').then(response => {
+  return fetch('https://restcountries.eu/rest/v2/name/ukraine').then(response => {
     return response.json();
   });
 }
 
-function renderCountyCard(country) {
+function renderCountryCard(country) {
   const card = countryCardTpl(country);
   refs.countryCard.innerHTML = card;
 }
