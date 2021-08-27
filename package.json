@@ -1,22 +1,22 @@
 {
-  "name": "yeliseyeva-goit-js-hw-12-countries",
+  "name": "goit-js-hw-12-countries",
   "version": "1.1.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://yeliseyeva.github.io/yeliseyeva-goit-js-hw-12-countries",
+  "homepage": "https://yeliseyeva.github.io/goit-js-hw-12-countries",
   "scripts": {
     "dev": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /yeliseyeva-goit-js-hw-12-countries/"
+    "build": "parcel build src/*.html --public-url /goit-js-hw-12-countries/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yeliseyeva/yeliseyeva-goit-js-hw-12-countries.git"
+    "url": "git+https://github.com/yeliseyeva/goit-js-hw-12-countries.git"
   },
   "keywords": [],
   "author": "Svetlana Yeliseyeva <nik29121997@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/yeliseyeva/yeliseyeva-goit-js-hw-12-countries/issues"
+    "url": "https://github.com/yeliseyeva/goit-js-hw-12-countries/issues"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.5",
