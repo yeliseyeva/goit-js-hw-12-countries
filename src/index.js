@@ -51,4 +51,3 @@ function renderCountryCard(country) {
     refs.countryCard.innerHTML = countryListTpl(country);
   }
 }
- 
